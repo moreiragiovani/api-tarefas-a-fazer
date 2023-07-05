@@ -1,6 +1,7 @@
 package com.tarefas.registradordetarefas.entitie;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
@@ -21,14 +22,19 @@ public class Tarefas implements Serializable{
     
     private String name;
     private String description;
+    private Integer index;
+    private LocalDateTime moment;
+   
 
     public Tarefas(){}
 
-    public Tarefas(UUID id, String name, String description) {
+    public Tarefas(UUID id, String name, String description, Integer index, LocalDateTime moment) {
         this.id = id;
         this.name = name;
         this.description = description;
-    }
+        this.index = index;
+        this.moment = moment;
+    }   
 
     public UUID getId() {
         return id;
@@ -52,6 +58,22 @@ public class Tarefas implements Serializable{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
+
+    public LocalDateTime getMoment() {
+        return moment;
+    }
+
+    public void setMoment(LocalDateTime moment) {
+        this.moment = moment;
     }
 
     @Override

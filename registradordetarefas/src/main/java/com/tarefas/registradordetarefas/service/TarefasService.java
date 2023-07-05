@@ -1,5 +1,6 @@
 package com.tarefas.registradordetarefas.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +17,8 @@ public class TarefasService {
     TarefasRepository tarefasRepository;
 
     public Tarefas createTarefa(Tarefas tarefa){
+        tarefa.setMoment(LocalDateTime.now());
+        tarefa.setIndex(findAllTarefas().size() + 1);
         return tarefasRepository.save(tarefa);
     }
 
