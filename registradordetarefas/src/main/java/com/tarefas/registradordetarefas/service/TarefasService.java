@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tarefas.registradordetarefas.dto.TarefaDto;
 import com.tarefas.registradordetarefas.entitie.Tarefas;
 import com.tarefas.registradordetarefas.repository.TarefasRepository;
 
@@ -16,10 +17,11 @@ public class TarefasService {
     @Autowired
     TarefasRepository tarefasRepository;
 
-    public Tarefas createTarefa(Tarefas tarefa){
+    public TarefaDto createTarefa(Tarefas tarefa){
         tarefa.setMoment(LocalDateTime.now());
         tarefa.setIndex(findAllTarefas().size() + 1);
-        return tarefasRepository.save(tarefa);
+        tarefasRepository.save(tarefa);
+        return tareToDto(tarefa, new TarefaDto());
     }
 
     public List<Tarefas> findAllTarefas(){
@@ -43,5 +45,13 @@ public class TarefasService {
         tarefa.setName(t.getName());
         tarefa.setDescription(t.getDescription());
         return tarefa;
+    }
+
+    public TarefaDto tareToDto(Tarefas t, TarefaDto tD){
+        tD.setName(t.getName());
+        tD.setDescription(t.getDescription());
+        tD.setIndex(t.getIndex());
+        tD.setMoment(t.getMoment());
+        return tD;
     }
 }
