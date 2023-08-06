@@ -1,13 +1,10 @@
 package com.tarefas.registradordetarefas.dto;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
-import org.springframework.cglib.core.Local;
 
 public class TarefaDto {
     
-    // SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
     private String name;
     private String description;

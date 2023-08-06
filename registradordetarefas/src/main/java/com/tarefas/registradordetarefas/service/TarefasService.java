@@ -17,11 +17,14 @@ public class TarefasService {
     @Autowired
     TarefasRepository tarefasRepository;
 
-    public TarefaDto createTarefa(Tarefas tarefa){
+    public TarefaDto createTarefa(TarefaDto tarefaDto){
+        Tarefas tarefa = new Tarefas();
+
         tarefa.setMoment(LocalDateTime.now());
         tarefa.setIndex(findAllTarefas().size() + 1);
-        tarefasRepository.save(tarefa);
-        return tareToDto(tarefa, new TarefaDto());
+        DtoToTarefa(tarefa, tarefaDto);  
+        
+        return tarefaToDto(tarefasRepository.save(tarefa), tarefaDto);
     }
 
     public List<Tarefas> findAllTarefas(){
@@ -47,7 +50,15 @@ public class TarefasService {
         return tarefa;
     }
 
-    public TarefaDto tareToDto(Tarefas t, TarefaDto tD){
+    public TarefaDto tarefaToDto(Tarefas t, TarefaDto tD){
+        tD.setName(t.getName());
+        tD.setDescription(t.getDescription());
+        tD.setIndex(t.getIndex());
+        tD.setMoment(t.getMoment());
+        return tD;
+    }
+
+    public Tarefas DtoToTarefa(Tarefas tD, TarefaDto t){
         tD.setName(t.getName());
         tD.setDescription(t.getDescription());
         tD.setIndex(t.getIndex());

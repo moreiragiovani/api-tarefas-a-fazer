@@ -28,21 +28,12 @@ public class Tarefas implements Serializable{
 
     public Tarefas(){}
 
-    public Tarefas(UUID id, String name, String description, Integer index, LocalDateTime moment) {
-        this.id = id;
+    public Tarefas(String name, String description, Integer index, LocalDateTime moment) {
         this.name = name;
         this.description = description;
         this.index = index;
         this.moment = moment;
     }   
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

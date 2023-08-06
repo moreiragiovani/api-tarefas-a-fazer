@@ -23,7 +23,7 @@ public class TarefasController {
     TarefasService tarefasService;
 
     @PostMapping("/create")
-    public ResponseEntity<TarefaDto> createTarefa(@RequestBody Tarefas tarefa){
+    public ResponseEntity<TarefaDto> createTarefa(@RequestBody TarefaDto tarefa){
         return ResponseEntity.ok().body(tarefasService.createTarefa(tarefa));
     }
 
