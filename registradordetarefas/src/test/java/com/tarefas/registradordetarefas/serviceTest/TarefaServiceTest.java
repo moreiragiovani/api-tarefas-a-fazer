@@ -10,7 +10,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static com.tarefas.registradordetarefas.communs.TarefasCommuns.TAREFA_DTO;
 import static com.tarefas.registradordetarefas.communs.TarefasCommuns.TAREFA;
+import static com.tarefas.registradordetarefas.communs.TarefasCommuns.TAREFA_INVALID_DTO;
+import static com.tarefas.registradordetarefas.communs.TarefasCommuns.TAREFA_INVALID;
+
+
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.tarefas.registradordetarefas.dto.TarefaDto;
 import com.tarefas.registradordetarefas.repository.TarefasRepository;
@@ -33,6 +39,13 @@ public class TarefaServiceTest {
 
         assertThat(tarefaDto).isEqualTo(TAREFA_DTO);
 
+    }
+
+    @Test
+    public void createTarefa_invalidData_throwsExepition(){
+        when(tarefasRepository.save(TAREFA_INVALID)).thenThrow(RuntimeException.class);
+
+        assertThatThrownBy(() -> tarefasService.createTarefa(TAREFA_INVALID_DTO)).isInstanceOf(RuntimeException.class);
     }
 
 }
