@@ -1,6 +1,7 @@
 package com.tarefas.registradordetarefas.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,12 +28,20 @@ public class TarefasService {
         return tarefaToDto(tarefasRepository.save(tarefa), tarefaDto);
     }
 
-    public List<Tarefas> findAllTarefas(){
-        return tarefasRepository.findAll();
+    public List<TarefaDto> findAllTarefas(){
+        List<TarefaDto> tarefaDtos = new ArrayList<>();
+        for(Tarefas t : tarefasRepository.findAll()){
+            tarefaDtos.add(tarefaToDto(t, new TarefaDto()));
+        }
+        return tarefaDtos;
     }
 
     public TarefaDto findByIdTarefa(UUID id){
         return tarefaToDto(tarefasRepository.findById(id).get(), new TarefaDto());
+    }
+
+    public TarefaDto findByName(String nome){
+        return tarefaToDto(tarefasRepository.findByNome(nome).get(), new TarefaDto());
     }
 
     public void deleteTarefa(UUID id){
