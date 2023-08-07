@@ -28,7 +28,7 @@ public class TarefasController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Tarefas> findTarefa(@PathVariable(name = "id") UUID id){
+    public ResponseEntity<TarefaDto> findByIdTarefa(@PathVariable(name = "id") UUID id){
         return ResponseEntity.ok().body(tarefasService.findByIdTarefa(id));
     }
 }

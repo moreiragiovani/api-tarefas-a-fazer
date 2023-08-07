@@ -1,6 +1,10 @@
 package com.tarefas.registradordetarefas.serviceTest;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +16,8 @@ import static com.tarefas.registradordetarefas.communs.TarefasCommuns.TAREFA_DTO
 import static com.tarefas.registradordetarefas.communs.TarefasCommuns.TAREFA;
 import static com.tarefas.registradordetarefas.communs.TarefasCommuns.TAREFA_INVALID_DTO;
 import static com.tarefas.registradordetarefas.communs.TarefasCommuns.TAREFA_INVALID;
+import static com.tarefas.registradordetarefas.communs.TarefasCommuns.ID;
+
 
 
 
@@ -48,4 +54,21 @@ public class TarefaServiceTest {
         assertThatThrownBy(() -> tarefasService.createTarefa(TAREFA_INVALID_DTO)).isInstanceOf(RuntimeException.class);
     }
 
+    @Test
+    public void findByid_getTarefaId_returnsTarefa(){
+        when(tarefasRepository.findById(ID)).thenReturn(Optional.of(TAREFA));
+
+        TarefaDto tarefa = tarefasService.findByIdTarefa(ID);
+
+        assertThat(tarefa).isNotNull();
+
+        assertThat(tarefa).isEqualTo(TAREFA_DTO);
+    }
+
+    @Test
+    public void findById_unexistingId_returnsEmpity(){
+        when(tarefasRepository.findById(ID)).thenReturn(Optional.empty());   
+
+        assertThatThrownBy(() -> tarefasService.findByIdTarefa(ID)).isInstanceOf(RuntimeException.class);
+    }
 }

@@ -28,12 +28,20 @@ public class Tarefas implements Serializable{
 
     public Tarefas(){}
 
-    public Tarefas(String name, String description, Integer index, LocalDateTime moment) {
+    public Tarefas(UUID id, String name, String description, Integer index, LocalDateTime moment) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.index = index;
         this.moment = moment;
     }   
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -74,6 +82,8 @@ public class Tarefas implements Serializable{
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + ((index == null) ? 0 : index.hashCode());
+        result = prime * result + ((moment == null) ? 0 : moment.hashCode());
         return result;
     }
 
@@ -101,6 +111,22 @@ public class Tarefas implements Serializable{
                 return false;
         } else if (!description.equals(other.description))
             return false;
+        if (index == null) {
+            if (other.index != null)
+                return false;
+        } else if (!index.equals(other.index))
+            return false;
+        if (moment == null) {
+            if (other.moment != null)
+                return false;
+        } else if (!moment.equals(other.moment))
+            return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Tarefas [id=" + id + ", name=" + name + ", description=" + description + ", index=" + index
+                + ", moment=" + moment + "]";
+    }   
 }

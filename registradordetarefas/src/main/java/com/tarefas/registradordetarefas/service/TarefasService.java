@@ -31,8 +31,8 @@ public class TarefasService {
         return tarefasRepository.findAll();
     }
 
-    public Tarefas findByIdTarefa(UUID id){
-        return tarefasRepository.findById(id).get();
+    public TarefaDto findByIdTarefa(UUID id){
+        return tarefaToDto(tarefasRepository.findById(id).get(), new TarefaDto());
     }
 
     public void deleteTarefa(UUID id){
@@ -51,6 +51,7 @@ public class TarefasService {
     }
 
     public TarefaDto tarefaToDto(Tarefas t, TarefaDto tD){
+        tD.setId(t.getId());
         tD.setName(t.getName());
         tD.setDescription(t.getDescription());
         tD.setIndex(t.getIndex());
@@ -59,6 +60,7 @@ public class TarefasService {
     }
 
     public Tarefas DtoToTarefa(Tarefas tD, TarefaDto t){
+        tD.setId(t.getId());
         tD.setName(t.getName());
         tD.setDescription(t.getDescription());
         tD.setIndex(t.getIndex());
